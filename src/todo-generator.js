@@ -8,6 +8,17 @@ class Todo {
   }
 }
 
+class Project {
+  constructor(title) {
+    this.title = title;
+    this.todos = [];
+  }
+  addTodo(todoData) {
+    const todo = new Todo(todoData);
+    this.todos.push(todo);
+  }
+}
+
 const todo1 = new Todo({
   title: "Coder la todo list",
   description: "Projet JS",
@@ -15,4 +26,13 @@ const todo1 = new Todo({
   priority: "high",
 });
 
-console.log(todo1);
+const project = new Project("Travail");
+
+project.addTodo({
+  title: "Coder",
+  description: "Todo app",
+  dueDate: "2026-03-20",
+  priority: "high",
+});
+
+console.log(todo1, project);
