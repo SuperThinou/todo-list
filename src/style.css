@@ -70,6 +70,63 @@ a {
 }
 /* END CSS RESET */
 
+body {
+    height: 100vh;
+}
+
+header {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 h1 {
-    color: red;
+    padding: 10px;
+}
+
+.content-container {
+    display: flex;
+}
+
+.sidebar {
+    height: 90vh;
+    overflow: auto;
+    border-right: 1px solid grey;
+}
+
+h2 {
+    font-size: 2rem;
+    padding: 10px;
+}
+
+.nav-el {
+    cursor: pointer;
+}
+
+h3 {
+    padding: 5px 10px;
+}
+
+/* Footer */
+
+footer {
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.github-logo {
+  transition: 0.1s ease-in-out;
+  height: 30px;
+  margin-left: 20px;
+}
+.github-logo:hover {
+  transform: scale(1.1);
 }

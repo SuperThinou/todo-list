@@ -25,6 +25,10 @@ export default {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,
         type: "asset/resource",
       },
+      {
+        test: /\.html$/i,
+        use: ["html-loader"],
+      },
     ],
   },
 };
