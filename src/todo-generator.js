@@ -1,3 +1,4 @@
+// Project and todo generation
 class Todo {
   constructor({ title, description, dueDate, priority }) {
     this.title = title;
@@ -19,20 +20,21 @@ class Project {
   }
 }
 
-const todo1 = new Todo({
-  title: "Coder la todo list",
-  description: "Projet JS",
+// Default todo and project
+const defaultTodo = new Todo({
+  title: "My task",
+  description: "My description",
   dueDate: "2026-03-15",
-  priority: "high",
+  priority: "medium",
 });
 
-const project = new Project("Travail");
+const defaultProject = new Project("Default project");
 
-project.addTodo({
-  title: "Coder",
-  description: "Todo app",
+defaultProject.addTodo({
+  title: "My task in a project",
+  description: "A little description",
   dueDate: "2026-03-20",
   priority: "high",
 });
 
-console.log(todo1, project);
+console.log(defaultTodo, defaultProject);
