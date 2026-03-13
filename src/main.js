@@ -1,6 +1,7 @@
 import "./style.css";
 import Todo from "./Todo";
 import Project from "./Project";
+import "./dom";
 
 // Default todo and project
 const defaultTodo = new Todo({
