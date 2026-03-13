@@ -134,7 +134,7 @@ main {
 
 
 
-#addTaskForm {
+#newTaskForm {
   z-index: 10;
   margin: 50px;
   background-color: white;
@@ -152,7 +152,7 @@ main {
   margin: 10px;
 }
 
-#addTaskForm > input {
+#newTaskForm > input {
   margin: 5px;
   padding: 10px;
   border: 1px solid rgb(209, 209, 209);

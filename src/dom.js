@@ -7,6 +7,7 @@ const thisWeekBtn = document.getElementById("thisWeekBtn");
 const mainTitle = document.getElementById("mainTitle");
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskPopup = document.getElementById("newTaskPopup");
+const newTaskForm = document.getElementById("newTaskForm");
 const addBtn = document.getElementById("addBtn");
 
 // sidebar event listeners
@@ -28,5 +29,7 @@ newTaskBtn.addEventListener("click", () => {
 });
 
 addBtn.addEventListener("click", () => {
-  newTaskPopup.classList.add("hidden");
+  if (newTaskForm.checkValidity()) {
+    newTaskPopup.classList.add("hidden");
+  } else alert("Required fields can't be empty");
 });
