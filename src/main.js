@@ -1,7 +1,6 @@
 import "./style.css";
 import Todo from "./Todo";
 import Project from "./Project";
-import "./dom";
 
 // Default todo and project
 const defaultTodo = new Todo({
@@ -12,7 +11,6 @@ const defaultTodo = new Todo({
 });
 
 const defaultProject = new Project("Default project");
-
 defaultProject.addTodo({
   title: "My task in a project",
   description: "A little description",
