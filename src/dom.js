@@ -11,6 +11,10 @@ const page = document.getElementById("page");
 const allTaskBtn = document.getElementById("allTasksBtn");
 const todayBtn = document.getElementById("todayBtn");
 const thisWeekBtn = document.getElementById("thisWeekBtn");
+const newProjectBtn = document.getElementById("newProjectBtn");
+const newProjectForm = document.getElementById("newProjectForm");
+const addProjectBtn = document.getElementById("addProjectBtn");
+const cancelProjectBtn = document.getElementById("cancelProjectBtn");
 
 // main selectors
 const mainTitle = document.getElementById("mainTitle");
@@ -37,6 +41,16 @@ thisWeekBtn.addEventListener("click", () => {
   clearContainer(container);
   mainTitle.textContent = "This week";
   getTodosThisWeek().forEach((todo) => displayTodoDom(todo, container));
+});
+
+newProjectBtn.addEventListener("click", () => {
+  newProjectForm.classList.remove("hidden");
+});
+
+addProjectBtn.addEventListener("click", () => {});
+
+cancelProjectBtn.addEventListener("click", () => {
+  newProjectForm.classList.add("hidden");
 });
 
 // main event listeners

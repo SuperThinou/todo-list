@@ -78,6 +78,12 @@ a {
   --bg-secondary: rgb(227, 247, 255);
   --bg-secondary-dark: rgb(206, 241, 255);
   --bg-secondary-darker: rgb(150, 225, 255);
+
+  --green: rgb(217, 255, 209);
+  --green-dark: rgb(92, 182, 75);
+
+  --red: rgb(255, 209, 209);
+  --red-dark: rgb(173, 75, 75);
 }
 
 body {
@@ -124,16 +130,61 @@ h3 {
     padding: 5px 10px;
 }
 
-#projectContainer {
+#projectsAndBtn {
   display: flex;
+  align-items: center;
 }
 
 #newProjectBtn {
-  background-color: var(--bg-primary-dark);
+  height: 40px;
+  width: 40px;
+  font-size: 1.5rem;
+  background-color: var(--bg-primary-darker);
+  border: none;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #newProjectBtn:hover {
-  background-color: var(--bg-primary-darker);
+  background-color: var(--bg-primary-darkest);
   cursor: pointer;
+}
+
+#newProjectForm {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+#newProjectForm input {
+  padding: 4px 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--bg-primary-darkest);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-container button {
+  margin: 0 4px;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+#addProjectBtn {
+  background-color: var(--green);
+  color: var(--green-dark);
+}
+
+#cancelProjectBtn {
+  background-color: var(--red);
+  color: var(--red-dark);
 }
 
 main {
@@ -256,9 +307,9 @@ legend {
   margin: 20px;
 }
 
-/* Dynamic classes */
+/* Utilitary classes */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .blur {
@@ -274,6 +325,7 @@ footer {
   width: 100%;
   position: absolute;
   bottom: 0;
+  background-color: var(--bg-primary);
 
   display: flex;
   justify-content: center;
