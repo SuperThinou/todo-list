@@ -59,6 +59,14 @@ newTaskBtn.addEventListener("click", () => {
   page.classList.add("blur");
 });
 
+newTaskPopup.addEventListener("click", (e) => {
+  newTaskPopup.classList.add("hidden");
+  page.classList.remove("blur");
+});
+form.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
 addBtn.addEventListener("click", () => {
   if (form.checkValidity()) {
     newTaskPopup.classList.add("hidden");

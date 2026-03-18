@@ -86,6 +86,10 @@ a {
   --red-dark: rgb(173, 75, 75);
 }
 
+* {
+  transition: 0.1s ease;
+}
+
 body {
     height: 100vh;
 }
