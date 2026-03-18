@@ -9,7 +9,7 @@ const thisWeekBtn = document.getElementById("thisWeekBtn");
 
 // main selectors
 const mainTitle = document.getElementById("mainTitle");
-const todosContainer = document.getElementById("todosContainer");
+const allTodosContainer = document.getElementById("allTodosContainer");
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskPopup = document.getElementById("newTaskPopup");
 const form = document.getElementById("newTaskForm");
@@ -52,7 +52,9 @@ export function getFormValues() {
   return { title, description, dueDate, priority };
 }
 
-function displayTodoDom(todo) {
+export function displayTodoDom(todo) {
+  const todoContainer = document.createElement("div");
+  todoContainer.classList.add("todo-container");
   const title = document.createElement("h3");
   const description = document.createElement("p");
   const priority = document.createElement("p");
@@ -61,5 +63,6 @@ function displayTodoDom(todo) {
   description.textContent = todo.description;
   priority.textContent = todo.priority;
 
-  todosContainer.append(title, description, priority);
+  todoContainer.append(title, description, priority);
+  allTodosContainer.append(todoContainer);
 }
