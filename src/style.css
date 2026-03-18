@@ -94,6 +94,10 @@ body {
     height: 100vh;
 }
 
+button {
+  font-weight: bold;
+}
+
 header {
     height: 10vh;
     display: flex;
@@ -191,6 +195,26 @@ h3 {
   color: var(--red-dark);
 }
 
+#allProjectsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-primary-dark);
+}
+
+.project-btn {
+  padding: 10px 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.project-btn:hover {
+  background-color: var(--bg-primary-darker);
+  cursor: pointer;
+}
+
 main {
     padding: 0 10vw;
     width: 75vw;
@@ -219,7 +243,7 @@ main {
   width: 100%;
   overflow: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 }
 
 .todo-container {

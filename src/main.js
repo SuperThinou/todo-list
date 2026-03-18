@@ -1,7 +1,12 @@
 import "./style.css";
 import Todo from "./Todo";
 import Project from "./Project";
-import { displayTodoDom, container } from "./dom";
+import {
+  displayTodoDom,
+  allTodosContainer,
+  allProjectsContainer,
+  displayProjectDom,
+} from "./dom";
 import { todos } from "./todoManager";
 
 // Default todo and project
@@ -20,4 +25,5 @@ defaultProject.addTodo({
 });
 
 todos.push(defaultTodo);
-displayTodoDom(defaultTodo, container);
+displayTodoDom(defaultTodo, allTodosContainer);
+displayProjectDom(defaultProject, allProjectsContainer);

@@ -4,6 +4,7 @@ import {
   getTodosToday,
   getTodosThisWeek,
 } from "./todoManager";
+import Project from "./Project";
 
 const page = document.getElementById("page");
 
@@ -15,10 +16,13 @@ const newProjectBtn = document.getElementById("newProjectBtn");
 const newProjectForm = document.getElementById("newProjectForm");
 const addProjectBtn = document.getElementById("addProjectBtn");
 const cancelProjectBtn = document.getElementById("cancelProjectBtn");
+export const allProjectsContainer = document.getElementById(
+  "allProjectsContainer",
+);
 
 // main selectors
 const mainTitle = document.getElementById("mainTitle");
-export const container = document.getElementById("allTodosContainer");
+export const allTodosContainer = document.getElementById("allTodosContainer");
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskPopup = document.getElementById("newTaskPopup");
 const form = document.getElementById("newTaskForm");
@@ -26,28 +30,30 @@ const addBtn = document.getElementById("addBtn");
 
 // sidebar event listeners
 allTaskBtn.addEventListener("click", () => {
-  clearContainer(container);
+  clearContainer(allTodosContainer);
   mainTitle.textContent = "All Tasks";
-  getAllTodos().forEach((todo) => displayTodoDom(todo, container));
+  getAllTodos().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
 todayBtn.addEventListener("click", () => {
-  clearContainer(container);
+  clearContainer(allTodosContainer);
   mainTitle.textContent = "Today";
-  getTodosToday().forEach((todo) => displayTodoDom(todo, container));
+  getTodosToday().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
 thisWeekBtn.addEventListener("click", () => {
-  clearContainer(container);
+  clearContainer(allTodosContainer);
   mainTitle.textContent = "This week";
-  getTodosThisWeek().forEach((todo) => displayTodoDom(todo, container));
+  getTodosThisWeek().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
 newProjectBtn.addEventListener("click", () => {
   newProjectForm.classList.remove("hidden");
 });
 
-addProjectBtn.addEventListener("click", () => {});
+addProjectBtn.addEventListener("click", () => {
+  const project = new Project();
+});
 
 cancelProjectBtn.addEventListener("click", () => {
   newProjectForm.classList.add("hidden");
@@ -72,7 +78,7 @@ addBtn.addEventListener("click", () => {
     newTaskPopup.classList.add("hidden");
     page.classList.remove("blur");
     const todo = addTodo(getFormValues());
-    displayTodoDom(todo, container);
+    displayTodoDom(todo, allTodosContainer);
   } else alert("Required fields can't be empty");
 });
 
@@ -101,6 +107,15 @@ export function displayTodoDom(todo, container) {
 
   todoContainer.append(title, description, dueDate, priority);
   container.append(todoContainer);
+}
+
+export function displayProjectDom(project, container) {
+  const projectBtn = document.createElement("h4");
+  projectBtn.classList.add("project-btn");
+
+  projectBtn.textContent = project.title;
+
+  container.append(projectBtn);
 }
 
 export function clearContainer(container) {
