@@ -124,6 +124,18 @@ h3 {
     padding: 5px 10px;
 }
 
+#projectContainer {
+  display: flex;
+}
+
+#newProjectBtn {
+  background-color: var(--bg-primary-dark);
+}
+#newProjectBtn:hover {
+  background-color: var(--bg-primary-darker);
+  cursor: pointer;
+}
+
 main {
     padding: 0 10vw;
     width: 75vw;
@@ -133,7 +145,7 @@ main {
     align-items: center;
 }
 
-#newTaskBtn {
+.blue-btn {
     margin-bottom: 20px;
     width: 50%;
     padding: 10px;
@@ -143,7 +155,7 @@ main {
     border: 1px solid var(--bg-secondary-darker);
     border-radius: 40px;
 }
-#newTaskBtn:hover {
+.blue-btn:hover {
   background-color: var(--bg-secondary-dark);
 }
 

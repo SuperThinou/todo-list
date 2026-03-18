@@ -1,4 +1,9 @@
-import Todo from "./Todo";
+import {
+  addTodo,
+  getAllTodos,
+  getTodosToday,
+  getTodosThisWeek,
+} from "./todoManager";
 
 const page = document.getElementById("page");
 
@@ -9,23 +14,29 @@ const thisWeekBtn = document.getElementById("thisWeekBtn");
 
 // main selectors
 const mainTitle = document.getElementById("mainTitle");
-const allTodosContainer = document.getElementById("allTodosContainer");
+export const container = document.getElementById("allTodosContainer");
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskPopup = document.getElementById("newTaskPopup");
 const form = document.getElementById("newTaskForm");
-export const addBtn = document.getElementById("addBtn");
+const addBtn = document.getElementById("addBtn");
 
 // sidebar event listeners
 allTaskBtn.addEventListener("click", () => {
+  clearContainer(container);
   mainTitle.textContent = "All Tasks";
+  getAllTodos().forEach((todo) => displayTodoDom(todo, container));
 });
 
 todayBtn.addEventListener("click", () => {
+  clearContainer(container);
   mainTitle.textContent = "Today";
+  getTodosToday().forEach((todo) => displayTodoDom(todo, container));
 });
 
 thisWeekBtn.addEventListener("click", () => {
+  clearContainer(container);
   mainTitle.textContent = "This week";
+  getTodosThisWeek().forEach((todo) => displayTodoDom(todo, container));
 });
 
 // main event listeners
@@ -38,6 +49,8 @@ addBtn.addEventListener("click", () => {
   if (form.checkValidity()) {
     newTaskPopup.classList.add("hidden");
     page.classList.remove("blur");
+    const todo = addTodo(getFormValues());
+    displayTodoDom(todo, container);
   } else alert("Required fields can't be empty");
 });
 

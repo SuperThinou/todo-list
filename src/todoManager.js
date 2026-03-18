@@ -1,7 +1,7 @@
 import Todo from "./Todo";
 import { isToday, isThisWeek } from "date-fns";
 
-const todos = [];
+export const todos = [];
 
 export function addTodo(todoData) {
   const todo = new Todo(todoData);
@@ -14,9 +14,9 @@ export function getAllTodos() {
 }
 
 export function getTodosToday() {
-  return todos.filter(todo => isToday(new Date(todo.dueDate)));
+  return todos.filter((todo) => isToday(new Date(todo.dueDate)));
 }
 
 export function getTodosThisWeek() {
-  return todos.filter(todo => isThisWeek(new Date(todo.dueDate)));
+  return todos.filter((todo) => isThisWeek(new Date(todo.dueDate)));
 }
