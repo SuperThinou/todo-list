@@ -46,9 +46,10 @@ addBtn.addEventListener("click", () => {
 export function getFormValues() {
   const title = form.querySelector("#title").value;
   const description = form.querySelector("#description").value;
-  const dueDate = "2027-03-15";
+  const dueDate = form.querySelector("#dueDate").value;
   const priority = form.querySelector('input[name="priority"]:checked')?.value;
 
+  console.log(dueDate.value);
   return { title, description, dueDate, priority };
 }
 
@@ -57,12 +58,15 @@ export function displayTodoDom(todo) {
   todoContainer.classList.add("todo-container");
   const title = document.createElement("h3");
   const description = document.createElement("p");
+  const dueDate = document.createElement("p");
   const priority = document.createElement("p");
 
   title.textContent = todo.title;
   description.textContent = todo.description;
-  priority.textContent = todo.priority;
+  dueDate.textContent = todo.dueDate;
+  priority.textContent = "Priority: " + todo.priority;
 
-  todoContainer.append(title, description, priority);
+  console.log(dueDate);
+  todoContainer.append(title, description, dueDate, priority);
   allTodosContainer.append(todoContainer);
 }

@@ -5,10 +5,10 @@ import { displayTodoDom } from "./dom";
 
 // Default todo and project
 const defaultTodo = new Todo({
-  title: "My task",
+  title: "Default task",
   description: "My description",
   dueDate: "2026-03-15",
-  priority: "medium",
+  priority: "Medium",
 });
 const defaultProject = new Project("Default project");
 defaultProject.addTodo({
