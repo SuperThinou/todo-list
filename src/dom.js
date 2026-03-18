@@ -13,7 +13,7 @@ const allTodosContainer = document.getElementById("allTodosContainer");
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskPopup = document.getElementById("newTaskPopup");
 const form = document.getElementById("newTaskForm");
-const addBtn = document.getElementById("addBtn");
+export const addBtn = document.getElementById("addBtn");
 
 // sidebar event listeners
 allTaskBtn.addEventListener("click", () => {
@@ -38,8 +38,6 @@ addBtn.addEventListener("click", () => {
   if (form.checkValidity()) {
     newTaskPopup.classList.add("hidden");
     page.classList.remove("blur");
-    const todo = new Todo(getFormValues());
-    displayTodoDom(todo);
   } else alert("Required fields can't be empty");
 });
 
@@ -49,13 +47,13 @@ export function getFormValues() {
   const dueDate = form.querySelector("#dueDate").value;
   const priority = form.querySelector('input[name="priority"]:checked')?.value;
 
-  console.log(dueDate.value);
   return { title, description, dueDate, priority };
 }
 
-export function displayTodoDom(todo) {
+export function displayTodoDom(todo, container) {
   const todoContainer = document.createElement("div");
   todoContainer.classList.add("todo-container");
+
   const title = document.createElement("h3");
   const description = document.createElement("p");
   const dueDate = document.createElement("p");
@@ -66,7 +64,10 @@ export function displayTodoDom(todo) {
   dueDate.textContent = todo.dueDate;
   priority.textContent = "Priority: " + todo.priority;
 
-  console.log(dueDate);
   todoContainer.append(title, description, dueDate, priority);
-  allTodosContainer.append(todoContainer);
+  container.append(todoContainer);
+}
+
+export function clearContainer(container) {
+  container.innerHTML = "";
 }

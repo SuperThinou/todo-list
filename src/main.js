@@ -1,7 +1,15 @@
 import "./style.css";
 import Todo from "./Todo";
 import Project from "./Project";
-import { displayTodoDom } from "./dom";
+import { displayTodoDom, clearContainer, addBtn } from "./dom";
+import {
+  addTodo,
+  getAllTodos,
+  getTodosToday,
+  getTodosThisWeek,
+} from "./todoManager";
+
+const container = document.getElementById("allTodosContainer");
 
 // Default todo and project
 const defaultTodo = new Todo({
@@ -18,4 +26,12 @@ defaultProject.addTodo({
   priority: "high",
 });
 
-displayTodoDom(defaultTodo);
+displayTodoDom(defaultTodo, container);
+
+// Event listeners
+addBtn.addEventListener("click", () => {
+  if (form.checkValidity()) {
+    const todo = new Todo(getFormValues());
+    displayTodoDom(todo, container);
+  }
+});
