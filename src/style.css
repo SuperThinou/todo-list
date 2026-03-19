@@ -71,6 +71,24 @@ a {
 /* END CSS RESET */
 
 :root {
+  --font-color: white;
+  --bg-primary: rgb(44, 44, 44);
+  --bg-primary-dark: rgb(34, 34, 34);
+  --bg-primary-darker: rgb(26, 26, 26);
+  --bg-primary-darkest: rgb(0, 0, 0);
+  --bg-secondary: rgb(139, 222, 255);
+  --bg-secondary-dark: rgb(86, 180, 218);
+  --bg-secondary-darker: rgb(44, 80, 94);
+
+  --green: rgb(114, 245, 88);
+  --green-dark: rgb(67, 136, 53);
+
+  --red: rgb(240, 82, 82);
+  --red-dark: rgb(68, 33, 33);
+}
+
+[data-theme="light"] {
+  --font-color: black;
   --bg-primary: rgb(255, 255, 255);
   --bg-primary-dark: rgb(250, 249, 249);
   --bg-primary-darker: rgb(236, 236, 236);
@@ -88,6 +106,7 @@ a {
 
 * {
   transition: 0.1s ease;
+  color: var(--font-color);
 }
 
 body {
@@ -102,11 +121,29 @@ header {
     height: 10vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: var(--bg-primary-darker);
 }
 
 h1 {
     padding: 10px;
+}
+
+#darkModeBtn {
+font-size: 1.5rem;
+padding: 0 20px;;
+border: none;
+background-color: transparent;
+cursor: pointer;
+}
+#darkModeBtn .sun {
+  display: none;
+}
+[data-theme="light"] #darkModeBtn .moon {
+  display: none;
+}
+[data-theme="light"] #darkModeBtn .sun {
+  display: block;
 }
 
 .content-container {
@@ -171,6 +208,7 @@ h3 {
   margin-bottom: 10px;
   border-radius: 10px;
   border: 1px solid var(--bg-primary-darkest);
+  background-color: var(--bg-primary-darker);
 }
 
 .btn-container {
@@ -342,6 +380,7 @@ legend {
 }
 
 #addBtn {
+  background-color: var(--bg-primary-darker);;
   cursor: pointer;
   width: 200px;
   height: 50px;
@@ -350,6 +389,9 @@ legend {
   border: none;
 
   margin: 20px;
+}
+#addBtn:hover {
+  background-color: var(--bg-primary-darkest);;
 }
 
 /* Utilitary classes */

@@ -17,7 +17,9 @@ import {
   clearCurrentProject,
 } from "./projectManager.js";
 
+const root = document.documentElement;
 const page = document.getElementById("page");
+const darkModeBtn = document.getElementById("darkModeBtn");
 
 // SIDEBAR SELECTORS
 const allTaskBtn = document.getElementById("allTasksBtn");
@@ -199,3 +201,14 @@ export function displayTodosInProjectDom(project, container) {
 export function clearContainer(container) {
   container.innerHTML = "";
 }
+
+// Theme switcher
+darkModeBtn.addEventListener("click", () => {
+  const currentTheme = root.getAttribute("data-theme");
+
+  if (currentTheme === "dark") {
+    root.setAttribute("data-theme", "light");
+  } else {
+    root.setAttribute("data-theme", "dark");
+  }
+});
