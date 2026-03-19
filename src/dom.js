@@ -1,6 +1,7 @@
 // I really need to refactor the code and separate the logic and dom manipulation..
 
 import {
+  todos,
   addTodo,
   getAllTodos,
   getTodosToday,
@@ -85,14 +86,14 @@ cancelProjectBtn.addEventListener("click", () => {
 });
 
 allProjectsContainer.addEventListener("click", (e) => {
+  clearContainer(allTodosContainer);
   const button = e.target.closest("button");
   if (!button) return;
 
   const projectId = button.dataset.id;
   const project = setCurrentProject(projectId);
 
-  clearContainer(allTodosContainer);
-
+  displayTodosInProjectDom(project, allTodosContainer);
   mainTitle.textContent = "Project: " + project.title;
   newTaskBtn.textContent = "New Task in " + project.title;
 });
@@ -120,6 +121,7 @@ addBtn.addEventListener("click", () => {
     const todo = addTodo(getFormValues());
     addTodoToCurrentProject(todo);
     displayTodoDom(todo, allTodosContainer);
+    console.log(projects, todos);
   } else alert("Required fields can't be empty");
 });
 
@@ -160,7 +162,12 @@ export function displayProjectDom(project, container) {
   projectBtn.textContent = project.title;
 
   container.append(projectBtn);
-  projects.push(project);
+}
+
+export function displayTodosInProjectDom(project, container) {
+  project.todos.forEach((todo) => {
+    displayTodoDom(todo, container);
+  });
 }
 
 export function clearContainer(container) {

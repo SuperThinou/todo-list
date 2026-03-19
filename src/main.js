@@ -8,6 +8,7 @@ import {
   displayProjectDom,
 } from "./dom";
 import { todos } from "./todoManager";
+import { projects } from "./projectManager";
 
 // Default todo and project
 const defaultTodo = new Todo({
@@ -26,4 +27,5 @@ defaultProject.addTodo({
 
 todos.push(defaultTodo);
 displayTodoDom(defaultTodo, allTodosContainer);
+projects.push(defaultProject);
 displayProjectDom(defaultProject, allProjectsContainer);
