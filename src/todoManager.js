@@ -1,11 +1,14 @@
 import Todo from "./Todo";
+import { currentProject } from "./projectManager";
 import { isToday, isThisWeek } from "date-fns";
 
-export const todos = [];
+export let todos = [];
 
 export function addTodo(todoData) {
   const todo = new Todo(todoData);
-  todos.push(todo);
+  if (!currentProject) {
+    todos.push(todo);
+  }
   return todo;
 }
 
@@ -19,4 +22,14 @@ export function getTodosToday() {
 
 export function getTodosThisWeek() {
   return todos.filter((todo) => isThisWeek(new Date(todo.dueDate)));
+}
+
+export function deleteTodo(id) {
+  todos = todos.filter((todo) => todo.id !== id);
+
+  if (currentProject) {
+    currentProject.todos = currentProject.todos.filter(
+      (todo) => todo.id !== id,
+    );
+  }
 }

@@ -6,6 +6,7 @@ import {
   getAllTodos,
   getTodosToday,
   getTodosThisWeek,
+  deleteTodo,
 } from "./todoManager";
 
 import {
@@ -86,13 +87,13 @@ cancelProjectBtn.addEventListener("click", () => {
 });
 
 allProjectsContainer.addEventListener("click", (e) => {
-  clearContainer(allTodosContainer);
   const button = e.target.closest("button");
   if (!button) return;
 
   const projectId = button.dataset.id;
   const project = setCurrentProject(projectId);
 
+  clearContainer(allTodosContainer);
   displayTodosInProjectDom(project, allTodosContainer);
   mainTitle.textContent = "Project: " + project.title;
   newTaskBtn.textContent = "New Task in " + project.title;
@@ -121,8 +122,21 @@ addBtn.addEventListener("click", () => {
     const todo = addTodo(getFormValues());
     addTodoToCurrentProject(todo);
     displayTodoDom(todo, allTodosContainer);
-    console.log(projects, todos);
   } else alert("Required fields can't be empty");
+});
+
+allTodosContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-task-btn")) {
+    const id = e.target.dataset.id;
+
+    deleteTodo(id);
+
+    clearContainer(allTodosContainer);
+
+    todos.forEach((todo) => {
+      displayTodoDom(todo, allTodosContainer);
+    });
+  }
 });
 
 // FUNCTIONS
@@ -144,14 +158,26 @@ export function displayTodoDom(todo, container) {
   const description = document.createElement("p");
   const dueDate = document.createElement("p");
   const priority = document.createElement("p");
+  const deleteTaskBtn = document.createElement("button");
 
   title.textContent = todo.title;
   description.textContent = todo.description;
   dueDate.textContent = todo.dueDate;
   priority.textContent = "Priority: " + todo.priority;
 
-  todoContainer.append(title, description, dueDate, priority);
+  deleteTaskBtn.textContent = "❌";
+  deleteTaskBtn.classList.add("delete-task-btn");
+  deleteTaskBtn.dataset.id = todo.id;
+
+  todoContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("delete-task-btn")) {
+    }
+  });
+
+  todoContainer.append(title, description, dueDate, priority, deleteTaskBtn);
   container.append(todoContainer);
+
+  return deleteTaskBtn;
 }
 
 export function displayProjectDom(project, container) {

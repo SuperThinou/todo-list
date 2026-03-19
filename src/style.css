@@ -256,7 +256,7 @@ main {
   border-radius: 10px;
   background-color: var(--bg-primary-darker);
   overflow-wrap: break-word;
-
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -264,8 +264,21 @@ main {
   align-items: center;
 }
 
-/* Add task popup */
+.delete-task-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+}
+.delete-task-btn:hover {
+  background-color: var(--bg-primary-darkest);
+  cursor: pointer;
+}
 
+/* Add task popup */
 
 .overlay {
   position: fixed;
