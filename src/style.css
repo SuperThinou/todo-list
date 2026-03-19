@@ -230,7 +230,7 @@ main {
 
 .blue-btn {
     margin-bottom: 20px;
-    width: 50%;
+    width: 30%;
     padding: 10px;
     cursor: pointer;
     background-color: var(--bg-secondary);
