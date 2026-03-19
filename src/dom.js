@@ -1,14 +1,22 @@
+// I really need to refactor the code and separate the logic and dom manipulation..
+
 import {
   addTodo,
   getAllTodos,
   getTodosToday,
   getTodosThisWeek,
 } from "./todoManager";
-import Project from "./Project";
+
+import {
+  projects,
+  currentProject,
+  createProject,
+  setCurrentProject,
+} from "./projectManager.js";
 
 const page = document.getElementById("page");
 
-// sidebar selectors
+// SIDEBAR SELECTORS
 const allTaskBtn = document.getElementById("allTasksBtn");
 const todayBtn = document.getElementById("todayBtn");
 const thisWeekBtn = document.getElementById("thisWeekBtn");
@@ -20,46 +28,78 @@ export const allProjectsContainer = document.getElementById(
   "allProjectsContainer",
 );
 
-// main selectors
+// MAIN SELECTORS
 const mainTitle = document.getElementById("mainTitle");
 export const allTodosContainer = document.getElementById("allTodosContainer");
+export const allTodosInProjectContainer = document.getElementById(
+  "allTodosInProjectContainer",
+);
 const newTaskBtn = document.getElementById("newTaskBtn");
 const newTaskPopup = document.getElementById("newTaskPopup");
 const form = document.getElementById("newTaskForm");
 const addBtn = document.getElementById("addBtn");
 
-// sidebar event listeners
+// SIDEBAR EVENT LISTENERS
+// Tasks event listeners (All, Today, This Week)
 allTaskBtn.addEventListener("click", () => {
+  currentProject = null;
   clearContainer(allTodosContainer);
   mainTitle.textContent = "All Tasks";
+  newTaskBtn.textContent = "New Task";
   getAllTodos().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
 todayBtn.addEventListener("click", () => {
+  currentProject = null;
   clearContainer(allTodosContainer);
   mainTitle.textContent = "Today";
+  newTaskBtn.textContent = "New Task";
   getTodosToday().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
 thisWeekBtn.addEventListener("click", () => {
+  currentProject = null;
   clearContainer(allTodosContainer);
   mainTitle.textContent = "This week";
+  newTaskBtn.textContent = "New Task";
   getTodosThisWeek().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
+// Projects event listeners (add btn, form and project selector)
 newProjectBtn.addEventListener("click", () => {
   newProjectForm.classList.remove("hidden");
 });
 
 addProjectBtn.addEventListener("click", () => {
-  const project = new Project();
+  const projectName = document.getElementById("projectName").value;
+  if (projectName === "") return;
+  const project = createProject(projectName);
+  displayProjectDom(project, allProjectsContainer);
+
+  newProjectForm.classList.add("hidden");
 });
 
 cancelProjectBtn.addEventListener("click", () => {
   newProjectForm.classList.add("hidden");
 });
 
-// main event listeners
+allProjectsContainer.addEventListener("click", (e) => {
+  const button = e.target.closest("button");
+  if (!button) return;
+
+  const projectId = button.dataset.id;
+  const project = setCurrentProject(projectId);
+
+  console.log(project, projectId, currentProject);
+
+  clearContainer(allTodosContainer);
+
+  mainTitle.textContent = "Project: " + project.title;
+  newTaskBtn.textContent = "New Task in " + project.title;
+});
+
+// MAIN EVENT LISTENERS
+// New task btn and popup form
 newTaskBtn.addEventListener("click", () => {
   newTaskPopup.classList.remove("hidden");
   page.classList.add("blur");
@@ -77,10 +117,14 @@ addBtn.addEventListener("click", () => {
   if (form.checkValidity()) {
     newTaskPopup.classList.add("hidden");
     page.classList.remove("blur");
+
     const todo = addTodo(getFormValues());
+    // addTodoToCurrentProject(todo);
     displayTodoDom(todo, allTodosContainer);
   } else alert("Required fields can't be empty");
 });
+
+// FUNCTIONS
 
 export function getFormValues() {
   const title = form.querySelector("#title").value;
@@ -110,12 +154,14 @@ export function displayTodoDom(todo, container) {
 }
 
 export function displayProjectDom(project, container) {
-  const projectBtn = document.createElement("h4");
+  const projectBtn = document.createElement("button");
   projectBtn.classList.add("project-btn");
+  projectBtn.dataset.id = project.id;
 
   projectBtn.textContent = project.title;
 
   container.append(projectBtn);
+  projects.push(project);
 }
 
 export function clearContainer(container) {
