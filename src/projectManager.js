@@ -19,3 +19,6 @@ export function addTodoToCurrentProject(todo) {
     currentProject.addTodo(todo);
   }
 }
+export function clearCurrentProject() {
+  currentProject = null;
+}

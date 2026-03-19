@@ -9,9 +9,10 @@ import {
 
 import {
   projects,
-  currentProject,
   createProject,
   setCurrentProject,
+  addTodoToCurrentProject,
+  clearCurrentProject,
 } from "./projectManager.js";
 
 const page = document.getElementById("page");
@@ -42,7 +43,7 @@ const addBtn = document.getElementById("addBtn");
 // SIDEBAR EVENT LISTENERS
 // Tasks event listeners (All, Today, This Week)
 allTaskBtn.addEventListener("click", () => {
-  currentProject = null;
+  clearCurrentProject();
   clearContainer(allTodosContainer);
   mainTitle.textContent = "All Tasks";
   newTaskBtn.textContent = "New Task";
@@ -50,7 +51,7 @@ allTaskBtn.addEventListener("click", () => {
 });
 
 todayBtn.addEventListener("click", () => {
-  currentProject = null;
+  clearCurrentProject();
   clearContainer(allTodosContainer);
   mainTitle.textContent = "Today";
   newTaskBtn.textContent = "New Task";
@@ -58,7 +59,7 @@ todayBtn.addEventListener("click", () => {
 });
 
 thisWeekBtn.addEventListener("click", () => {
-  currentProject = null;
+  clearCurrentProject();
   clearContainer(allTodosContainer);
   mainTitle.textContent = "This week";
   newTaskBtn.textContent = "New Task";
@@ -90,8 +91,6 @@ allProjectsContainer.addEventListener("click", (e) => {
   const projectId = button.dataset.id;
   const project = setCurrentProject(projectId);
 
-  console.log(project, projectId, currentProject);
-
   clearContainer(allTodosContainer);
 
   mainTitle.textContent = "Project: " + project.title;
@@ -119,7 +118,7 @@ addBtn.addEventListener("click", () => {
     page.classList.remove("blur");
 
     const todo = addTodo(getFormValues());
-    // addTodoToCurrentProject(todo);
+    addTodoToCurrentProject(todo);
     displayTodoDom(todo, allTodosContainer);
   } else alert("Required fields can't be empty");
 });
