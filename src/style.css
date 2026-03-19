@@ -72,13 +72,13 @@ a {
 
 :root {
   --font-color: white;
-  --bg-primary: rgb(44, 44, 44);
-  --bg-primary-dark: rgb(34, 34, 34);
-  --bg-primary-darker: rgb(26, 26, 26);
+  --bg-primary: rgb(37, 37, 37);
+  --bg-primary-dark: rgb(29, 29, 29);
+  --bg-primary-darker: rgb(22, 22, 22);
   --bg-primary-darkest: rgb(0, 0, 0);
   --bg-secondary: rgb(139, 222, 255);
   --bg-secondary-dark: rgb(86, 180, 218);
-  --bg-secondary-darker: rgb(44, 80, 94);
+  --bg-secondary-darker: rgb(56, 127, 155);
 
   --green: rgb(114, 245, 88);
   --green-dark: rgb(67, 136, 53);
@@ -380,7 +380,7 @@ legend {
 }
 
 #addBtn {
-  background-color: var(--bg-primary-darker);;
+  background-color: var(--bg-primary-dark);;
   cursor: pointer;
   width: 200px;
   height: 50px;
@@ -391,7 +391,7 @@ legend {
   margin: 20px;
 }
 #addBtn:hover {
-  background-color: var(--bg-primary-darkest);;
+  background-color: var(--bg-primary-darker);;
 }
 
 /* Utilitary classes */
