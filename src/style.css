@@ -319,18 +319,21 @@ main {
   align-items: center;
 }
 
-.delete-task-btn {
+.task-btn-container {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.edit-task-btn, .delete-task-btn {
   padding: 10px;
   border: none;
   border-radius: 10px;
   background-color: transparent;
-}
-.delete-task-btn:hover {
-  background-color: var(--bg-primary-darkest);
   cursor: pointer;
+}
+.edit-task-btn:hover, .delete-task-btn:hover {
+  background-color: var(--bg-primary-darkest);
 }
 
 /* Add task popup */
@@ -440,6 +443,7 @@ footer {
 .github-logo {
   transition: 0.1s ease-in-out;
   height: 30px;
+  width: 30px;
   margin-left: 20px;
 }
 .github-logo:hover {

@@ -1,4 +1,5 @@
-// I really need to refactor the code and separate the logic and dom manipulation..
+import editIcon from "./icons/edit.svg";
+import githubIcon from "./icons/github-mark-grey.svg";
 
 import {
   todos,
@@ -181,6 +182,8 @@ export function displayTodoDom(todo, container) {
   const description = document.createElement("p");
   const dueDate = document.createElement("p");
   const priority = document.createElement("p");
+  const taskBtnContainer = document.createElement("div");
+  const editTaskBtn = document.createElement("button");
   const deleteTaskBtn = document.createElement("button");
 
   title.textContent = todo.title;
@@ -188,16 +191,18 @@ export function displayTodoDom(todo, container) {
   dueDate.textContent = todo.dueDate;
   priority.textContent = "Priority: " + todo.priority;
 
+  taskBtnContainer.classList.add("task-btn-container");
+
+  editTaskBtn.innerHTML = editIcon;
+  editTaskBtn.classList.add("edit-task-btn");
+  editTaskBtn.dataset.id = todo.id;
+
   deleteTaskBtn.textContent = "❌";
   deleteTaskBtn.classList.add("delete-task-btn");
   deleteTaskBtn.dataset.id = todo.id;
 
-  todoContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("delete-task-btn")) {
-    }
-  });
-
-  todoContainer.append(title, description, dueDate, priority, deleteTaskBtn);
+  taskBtnContainer.append(editTaskBtn, deleteTaskBtn);
+  todoContainer.append(title, description, dueDate, priority, taskBtnContainer);
   container.append(todoContainer);
 
   return deleteTaskBtn;
@@ -244,3 +249,9 @@ darkModeBtn.addEventListener("click", () => {
     root.setAttribute("data-theme", "dark");
   }
 });
+
+// Footer logo
+const link = document.querySelector(".github-link");
+link.innerHTML = githubIcon;
+const ghLogoSvg = link.querySelector("svg");
+ghLogoSvg.classList.add("github-logo");
