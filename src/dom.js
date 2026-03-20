@@ -1,4 +1,5 @@
 import editIcon from "./icons/edit.svg";
+import closeIcon from "./icons/close.svg";
 import githubIcon from "./icons/github-mark-grey.svg";
 
 import {
@@ -197,7 +198,7 @@ export function displayTodoDom(todo, container) {
   editTaskBtn.classList.add("edit-task-btn");
   editTaskBtn.dataset.id = todo.id;
 
-  deleteTaskBtn.textContent = "❌";
+  deleteTaskBtn.innerHTML = closeIcon;
   deleteTaskBtn.classList.add("delete-task-btn");
   deleteTaskBtn.dataset.id = todo.id;
 
@@ -219,7 +220,7 @@ export function displayProjectDom(project, container) {
   deleteProjectBtn.dataset.id = project.id;
 
   projectBtn.textContent = project.title;
-  deleteProjectBtn.textContent = "❌";
+  deleteProjectBtn.innerHTML = closeIcon;
 
   projectBtn.append(deleteProjectBtn);
   container.append(projectBtn);
@@ -228,7 +229,7 @@ export function displayProjectDom(project, container) {
 }
 
 export function displayTodosInProjectDom(project, container) {
-  if (project.todos) {
+  if (project.todos > 0) {
     project.todos.forEach((todo) => {
       displayTodoDom(todo, container);
     });

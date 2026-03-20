@@ -89,7 +89,7 @@ a {
 }
 
 [data-theme="light"] {
-  --font-color: black;
+  --font-color: rgb(44, 44, 44);
   --bg-primary: rgb(255, 255, 255);
   --bg-primary-dark: rgb(250, 249, 249);
   --bg-primary-darker: rgb(236, 236, 236);
@@ -262,6 +262,7 @@ h3 {
 }
 
 .delete-project-btn {
+  margin-right: 5px;
   padding: 5px;
   position: absolute;
   right: 0;
