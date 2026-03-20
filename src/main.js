@@ -29,3 +29,5 @@ todos.push(defaultTodo);
 displayTodoDom(defaultTodo, allTodosContainer);
 projects.push(defaultProject);
 displayProjectDom(defaultProject, allProjectsContainer);
+
+//Faire feature pour modifier une todo et gérer save en local storage

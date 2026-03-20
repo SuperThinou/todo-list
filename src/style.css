@@ -79,6 +79,7 @@ a {
   --bg-secondary: rgb(139, 222, 255);
   --bg-secondary-dark: rgb(86, 180, 218);
   --bg-secondary-darker: rgb(56, 127, 155);
+  --bg-footer: black;
 
   --green: rgb(114, 245, 88);
   --green-dark: rgb(67, 136, 53);
@@ -96,6 +97,8 @@ a {
   --bg-secondary: rgb(227, 247, 255);
   --bg-secondary-dark: rgb(206, 241, 255);
   --bg-secondary-darker: rgb(150, 225, 255);
+  --bg-footer: white;
+
 
   --green: rgb(217, 255, 209);
   --green-dark: rgb(92, 182, 75);
@@ -246,15 +249,29 @@ h3 {
   padding: 10px 0;
   width: 100%;
   height: 100%;
+  position: relative;
   border: none;
   background-color: var(--bg-primary-dark);
   display: flex;
   justify-content: center;
+  align-items: center;
 }
-
 .project-btn:hover {
   background-color: var(--bg-primary-darker);
   cursor: pointer;
+}
+
+.delete-project-btn {
+  padding: 5px;
+  position: absolute;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.delete-project-btn:hover {
+  background-color: var(--bg-primary-darkest);
 }
 
 main {
@@ -412,7 +429,7 @@ footer {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-footer);
 
   display: flex;
   justify-content: center;

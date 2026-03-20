@@ -12,9 +12,11 @@ import {
 import {
   projects,
   createProject,
+  currentProject,
   setCurrentProject,
   addTodoToCurrentProject,
   clearCurrentProject,
+  deleteProject,
 } from "./projectManager.js";
 
 const root = document.documentElement;
@@ -70,7 +72,7 @@ thisWeekBtn.addEventListener("click", () => {
   getTodosThisWeek().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 });
 
-// Projects event listeners (add btn, form and project selector)
+// Projects event listeners (add btn, form, project selector and delete)
 newProjectBtn.addEventListener("click", () => {
   newProjectForm.classList.remove("hidden");
 });
@@ -89,10 +91,23 @@ cancelProjectBtn.addEventListener("click", () => {
 });
 
 allProjectsContainer.addEventListener("click", (e) => {
+  const projectId = e.target.dataset.id;
+
+  if (e.target.classList.contains("delete-project-btn")) {
+    const projectBtn = e.target.closest(".project-btn");
+    const isDeleted = deleteProject(projectId);
+
+    if (isDeleted) {
+      projectBtn.remove();
+      clearContainer(allTodosContainer);
+    }
+
+    return;
+  }
+
   const button = e.target.closest("button");
   if (!button) return;
 
-  const projectId = button.dataset.id;
   const project = setCurrentProject(projectId);
 
   clearContainer(allTodosContainer);
@@ -135,9 +150,15 @@ allTodosContainer.addEventListener("click", (e) => {
 
     clearContainer(allTodosContainer);
 
-    todos.forEach((todo) => {
-      displayTodoDom(todo, allTodosContainer);
-    });
+    if (currentProject) {
+      const project = projects.find((p) => p.id === currentProject.id);
+      project.todos.forEach((todo) => {
+        displayTodoDom(todo, allTodosContainer);
+      });
+    } else
+      todos.forEach((todo) => {
+        displayTodoDom(todo, allTodosContainer);
+      });
   }
 });
 
@@ -184,18 +205,29 @@ export function displayTodoDom(todo, container) {
 
 export function displayProjectDom(project, container) {
   const projectBtn = document.createElement("button");
+  const deleteProjectBtn = document.createElement("button");
+
   projectBtn.classList.add("project-btn");
   projectBtn.dataset.id = project.id;
 
-  projectBtn.textContent = project.title;
+  deleteProjectBtn.classList.add("delete-project-btn");
+  deleteProjectBtn.dataset.id = project.id;
 
+  projectBtn.textContent = project.title;
+  deleteProjectBtn.textContent = "❌";
+
+  projectBtn.append(deleteProjectBtn);
   container.append(projectBtn);
+
+  return deleteProjectBtn;
 }
 
 export function displayTodosInProjectDom(project, container) {
-  project.todos.forEach((todo) => {
-    displayTodoDom(todo, container);
-  });
+  if (project.todos) {
+    project.todos.forEach((todo) => {
+      displayTodoDom(todo, container);
+    });
+  }
 }
 
 export function clearContainer(container) {
