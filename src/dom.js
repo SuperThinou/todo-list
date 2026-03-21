@@ -57,7 +57,7 @@ allTaskBtn.addEventListener("click", () => {
 todayBtn.addEventListener("click", () => {
   refreshMain("Today", getTodosToday);
 });
- 
+
 thisWeekBtn.addEventListener("click", () => {
   refreshMain("This week", getTodosThisWeek);
 });
@@ -87,13 +87,12 @@ allProjectsContainer.addEventListener("click", (e) => {
   if (deleteBtn && projectBtn) {
     const projectId = projectBtn.dataset.id;
 
-    console.log(projectId);
-
     const isDeleted = deleteProject(projectId);
 
     if (isDeleted) {
       projectBtn.remove();
       clearContainer(allTodosContainer);
+      refreshMain("All Tasks", getAllTodos);
     }
 
     return;

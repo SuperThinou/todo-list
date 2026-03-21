@@ -71,8 +71,6 @@ a {
 /* END CSS RESET */
 
 :root {
-  --font-color: white;
-  --task-btn: rgb(83, 83, 83);
   --bg-primary: rgb(37, 37, 37);
   --bg-primary-dark: rgb(29, 29, 29);
   --bg-primary-darker: rgb(22, 22, 22);
@@ -80,18 +78,20 @@ a {
   --bg-secondary: rgb(139, 222, 255);
   --bg-secondary-dark: rgb(86, 180, 218);
   --bg-secondary-darker: rgb(56, 127, 155);
-  --bg-footer: black;
 
   --green: rgb(114, 245, 88);
   --green-dark: rgb(67, 136, 53);
 
   --red: rgb(240, 82, 82);
   --red-dark: rgb(68, 33, 33);
+
+  --font-color: white;
+  --task-btn: rgb(83, 83, 83);
+  --bg-footer: black;
+  --selection: rgb(54, 54, 54);
 }
 
 [data-theme="light"] {
-  --font-color: rgb(44, 44, 44);
-  --task-btn: rgb(224, 224, 224);
   --bg-primary: rgb(255, 255, 255);
   --bg-primary-dark: rgb(250, 249, 249);
   --bg-primary-darker: rgb(236, 236, 236);
@@ -99,13 +99,22 @@ a {
   --bg-secondary: rgb(227, 247, 255);
   --bg-secondary-dark: rgb(206, 241, 255);
   --bg-secondary-darker: rgb(150, 225, 255);
-  --bg-footer: white;
 
   --green: rgb(217, 255, 209);
   --green-dark: rgb(92, 182, 75);
 
   --red: rgb(255, 209, 209);
   --red-dark: rgb(173, 75, 75);
+
+  --font-color: rgb(44, 44, 44);
+  --task-btn: rgb(224, 224, 224);
+  --bg-footer: white;
+  --selection: rgb(206, 206, 206);
+}
+
+::selection {
+  background: var(--selection);
+  text-shadow: none;
 }
 
 * {
@@ -295,7 +304,7 @@ main {
 
 .blue-btn {
   margin-bottom: 20px;
-  width: 30%;
+  min-width: 300px;
   padding: 10px;
   cursor: pointer;
   background-color: var(--bg-secondary);
@@ -492,6 +501,11 @@ footer {
 
   main {
     width: 100vw;
+    overflow: hidden;
+  }
+
+  .blue-btn {
+    min-width: 30vw;
   }
 }
 
