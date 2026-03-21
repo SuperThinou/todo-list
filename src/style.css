@@ -339,6 +339,10 @@ main {
   align-items: center;
 }
 
+.todo-container > * {
+  padding: 5px;
+}
+
 .task-btn-container {
   position: absolute;
   top: 0;

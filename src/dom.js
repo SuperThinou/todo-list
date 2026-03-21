@@ -21,6 +21,9 @@ import {
   deleteProject,
 } from "./projectManager.js";
 
+import { format, isToday, isTomorrow, isYesterday, parseISO } from "date-fns";
+import { fr } from "date-fns/locale";
+
 const root = document.documentElement;
 const page = document.getElementById("page");
 const darkModeBtn = document.getElementById("darkModeBtn");
@@ -143,10 +146,8 @@ allTodosContainer.addEventListener("click", (e) => {
   if (!deleteBtn) return;
 
   const id = deleteBtn.dataset.id;
-  console.log(id);
 
   deleteTodo(id);
-
   clearContainer(allTodosContainer);
 
   if (currentProject) {
@@ -158,6 +159,16 @@ allTodosContainer.addEventListener("click", (e) => {
     todos.forEach((todo) => {
       displayTodoDom(todo, allTodosContainer);
     });
+});
+
+allTodosContainer.addEventListener("click", (e) => {
+  const editBtn = e.target.closest(".edit-task-btn");
+
+  if (!editBtn) return;
+  newTaskPopup.classList.remove("hidden");
+  page.classList.add("blur");
+
+  console.log("bonjour");
 });
 
 // FUNCTIONS
@@ -185,7 +196,8 @@ export function displayTodoDom(todo, container) {
 
   title.textContent = todo.title;
   description.textContent = todo.description;
-  dueDate.textContent = todo.dueDate;
+  dueDate.textContent = dueDate.textContent =
+    "Deadline: " + formatDate(todo.dueDate);
   priority.textContent = "Priority: " + todo.priority;
 
   taskBtnContainer.classList.add("task-btn-container");
@@ -239,9 +251,20 @@ function refreshMain(title, getTodosFn) {
   clearContainer(allTodosContainer);
 
   mainTitle.textContent = title;
-  newTaskBtn.textContent = "New Task";
+  if (title !== "All Tasks") newTaskBtn.textContent = "New Task " + title;
+  else newTaskBtn.textContent = "New Task ";
 
   getTodosFn().forEach((todo) => displayTodoDom(todo, allTodosContainer));
+}
+
+function formatDate(dateString) {
+  const date = parseISO(dateString);
+
+  if (isToday(date)) return "Aujourd’hui";
+  if (isTomorrow(date)) return "Demain";
+  if (isYesterday(date)) return "Hier";
+
+  return format(date, "d MMMM yyyy", { locale: fr });
 }
 
 // Theme switcher

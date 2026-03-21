@@ -31,4 +31,3 @@ projects.push(defaultProject);
 displayProjectDom(defaultProject, allProjectsContainer);
 
 //Faire feature pour modifier une todo et gérer save en local storage
-// Fix l'error quand on delete Default project au chargement de la page
