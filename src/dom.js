@@ -57,7 +57,7 @@ allTaskBtn.addEventListener("click", () => {
 todayBtn.addEventListener("click", () => {
   refreshMain("Today", getTodosToday);
 });
-
+ 
 thisWeekBtn.addEventListener("click", () => {
   refreshMain("This week", getTodosThisWeek);
 });

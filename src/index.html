@@ -18,16 +18,22 @@
       <div class="content-container">
         <div id="sidebar">
           <h2>Tasks</h2>
-          <button id="allTasksBtn" class="nav-el" data-view="all">
-            All tasks
-          </button>
-          <button id="todayBtn" class="nav-el" data-view="today">Today</button>
-          <button id="thisWeekBtn" class="nav-el" data-view="week">
-            This Week
-          </button>
-          <div id="projectsAndBtn">
-            <h2>Projects</h2>
-            <button id="newProjectBtn">+</button>
+          <div class="tasks-btn-container">
+            <button id="allTasksBtn" class="nav-el" data-view="all">
+              All tasks
+            </button>
+            <button id="todayBtn" class="nav-el" data-view="today">
+              Today
+            </button>
+            <button id="thisWeekBtn" class="nav-el" data-view="week">
+              This Week
+            </button>
+          </div>
+          <div class="project-btn-container">
+            <div id="projectsAndBtn">
+              <h2>Projects</h2>
+              <button id="newProjectBtn">+</button>
+            </div>
           </div>
           <div id="newProjectForm" class="hidden">
             <input type="text" id="projectName" placeholder="Project name" />

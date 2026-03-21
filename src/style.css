@@ -72,6 +72,7 @@ a {
 
 :root {
   --font-color: white;
+  --task-btn: rgb(83, 83, 83);
   --bg-primary: rgb(37, 37, 37);
   --bg-primary-dark: rgb(29, 29, 29);
   --bg-primary-darker: rgb(22, 22, 22);
@@ -90,6 +91,7 @@ a {
 
 [data-theme="light"] {
   --font-color: rgb(44, 44, 44);
+  --task-btn: rgb(224, 224, 224);
   --bg-primary: rgb(255, 255, 255);
   --bg-primary-dark: rgb(250, 249, 249);
   --bg-primary-darker: rgb(236, 236, 236);
@@ -157,7 +159,7 @@ h1 {
 #sidebar {
   height: 90vh;
   max-height: 90vh;
-  width: 15vw;
+  min-width: 200px;
   overflow: hidden;
   border-right: 1px solid var(--bg-primary-darker);
   background-color: var(--bg-primary);
@@ -245,6 +247,7 @@ button.nav-el {
 
 #allProjectsContainer {
   max-height: 30vh;
+  width: 100%;
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -430,7 +433,7 @@ legend {
 
 .blur {
   filter: blur(4px);
-  pointer-events: none; /* empêche de cliquer derrière */
+  pointer-events: none;
   user-select: none;
 }
 
@@ -457,4 +460,43 @@ footer {
 }
 .github-logo:hover {
   transform: scale(1.1);
+}
+
+@media screen and (max-width: 800px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  #sidebar {
+    height: 100%;
+    border-bottom: 1px solid var(--bg-primary-darkest);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tasks-btn-container {
+    display: flex;
+    padding: 0 20px;
+    width: 100%;
+  }
+
+  button.nav-el {
+    margin: 4px;
+    border: 1px solid var(--bg-primary-darker);
+    background-color: var(--task-btn);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  main {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  button.nav-el {
+    font-size: 1rem;
+  }
 }
