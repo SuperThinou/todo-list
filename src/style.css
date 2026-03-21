@@ -99,7 +99,6 @@ a {
   --bg-secondary-darker: rgb(150, 225, 255);
   --bg-footer: white;
 
-
   --green: rgb(217, 255, 209);
   --green-dark: rgb(92, 182, 75);
 
@@ -113,7 +112,8 @@ a {
 }
 
 body {
-    height: 100vh;
+  height: 100vh;
+  background-color: var(--bg-primary);
 }
 
 button {
@@ -121,23 +121,23 @@ button {
 }
 
 header {
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--bg-primary-darker);
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-primary-darker);
 }
 
 h1 {
-    padding: 10px;
+  padding: 10px;
 }
 
 #darkModeBtn {
-font-size: 1.5rem;
-padding: 0 20px;;
-border: none;
-background-color: transparent;
-cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 #darkModeBtn .sun {
   display: none;
@@ -150,33 +150,33 @@ cursor: pointer;
 }
 
 .content-container {
-    background-color: var(--bg-primary-dark);
-    display: flex;
+  background-color: var(--bg-primary-dark);
+  display: flex;
 }
 
 .sidebar {
-    height: 90vh;
-    max-height: 90vh;
-    width: 15vw;
-    overflow: auto;
-    border-right: 1px solid var(--bg-primary-darker);
-    background-color: var(--bg-primary);
+  height: 90vh;
+  max-height: 90vh;
+  width: 15vw;
+  overflow: auto;
+  border-right: 1px solid var(--bg-primary-darker);
+  background-color: var(--bg-primary);
 }
 
 h2 {
-    font-size: 2rem;
-    padding: 10px;
+  font-size: 2rem;
+  padding: 10px;
 }
 
 .nav-el {
-    cursor: pointer;
+  cursor: pointer;
 }
 .nav-el:hover {
   background-color: var(--bg-primary-darker);
 }
 
 h3 {
-    padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 #projectsAndBtn {
@@ -276,29 +276,30 @@ h3 {
 }
 
 main {
-    padding: 0 10vw;
-    width: 75vw;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
+  padding: 0 10vw;
+  width: 75vw;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
 }
 
 .blue-btn {
-    margin-bottom: 20px;
-    width: 30%;
-    padding: 10px;
-    cursor: pointer;
-    background-color: var(--bg-secondary);
-    color: var(--bg-secondary-darker);
-    border: 1px solid var(--bg-secondary-darker);
-    border-radius: 40px;
+  margin-bottom: 20px;
+  width: 30%;
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--bg-secondary);
+  color: var(--bg-secondary-darker);
+  border: 1px solid var(--bg-secondary-darker);
+  border-radius: 40px;
 }
 .blue-btn:hover {
   background-color: var(--bg-secondary-dark);
 }
 
-#allTodosContainer, #allTodosInProjectContainer {
+#allTodosContainer,
+#allTodosInProjectContainer {
   max-height: 50vh;
   width: 100%;
   overflow: auto;
@@ -326,14 +327,16 @@ main {
   right: 0;
 }
 
-.edit-task-btn, .delete-task-btn {
+.edit-task-btn,
+.delete-task-btn {
   padding: 10px;
   border: none;
   border-radius: 10px;
   background-color: transparent;
   cursor: pointer;
 }
-.edit-task-btn:hover, .delete-task-btn:hover {
+.edit-task-btn:hover,
+.delete-task-btn:hover {
   background-color: var(--bg-primary-darkest);
 }
 
@@ -380,28 +383,27 @@ label {
 }
 
 textarea {
-    margin: 5px;
-    padding: 10px;
-    height: 150px;
-    width: 70%;
-    border-radius: 15px;
-    border: 1px solid var(--bg-primary-darkest);
-    background-color: var(--bg-primary-dark);
+  margin: 5px;
+  padding: 10px;
+  height: 150px;
+  width: 70%;
+  border-radius: 15px;
+  border: 1px solid var(--bg-primary-darkest);
+  background-color: var(--bg-primary-dark);
 }
 
 fieldset {
-    margin: 15px;
-    padding: 7px;
-    border: none;
+  margin: 15px;
+  padding: 7px;
+  border: none;
 }
 
 legend {
-    text-align: center;
-
+  text-align: center;
 }
 
 #addBtn {
-  background-color: var(--bg-primary-dark);;
+  background-color: var(--bg-primary-dark);
   cursor: pointer;
   width: 200px;
   height: 50px;
@@ -412,12 +414,12 @@ legend {
   margin: 20px;
 }
 #addBtn:hover {
-  background-color: var(--bg-primary-darker);;
+  background-color: var(--bg-primary-darker);
 }
 
 /* Utilitary classes */
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .blur {
