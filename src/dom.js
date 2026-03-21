@@ -93,10 +93,14 @@ cancelProjectBtn.addEventListener("click", () => {
 });
 
 allProjectsContainer.addEventListener("click", (e) => {
-  const projectId = e.target.dataset.id;
+  const deleteBtn = e.target.closest(".delete-project-btn");
+  const projectBtn = e.target.closest(".project-btn");
 
-  if (e.target.classList.contains("delete-project-btn")) {
-    const projectBtn = e.target.closest(".project-btn");
+  if (deleteBtn && projectBtn) {
+    const projectId = projectBtn.dataset.id;
+
+    console.log(projectId);
+
     const isDeleted = deleteProject(projectId);
 
     if (isDeleted) {
@@ -107,19 +111,21 @@ allProjectsContainer.addEventListener("click", (e) => {
     return;
   }
 
-  const button = e.target.closest("button");
+  const button = e.target.closest(".project-btn");
   if (!button) return;
 
+  const projectId = button.dataset.id;
   const project = setCurrentProject(projectId);
 
   clearContainer(allTodosContainer);
   displayTodosInProjectDom(project, allTodosContainer);
+
   mainTitle.textContent = "Project: " + project.title;
   newTaskBtn.textContent = "New Task in " + project.title;
 });
 
 // MAIN EVENT LISTENERS
-// New task btn and popup form
+// New task btn, popup form and task btns
 newTaskBtn.addEventListener("click", () => {
   newTaskPopup.classList.remove("hidden");
   page.classList.add("blur");
@@ -145,23 +151,26 @@ addBtn.addEventListener("click", () => {
 });
 
 allTodosContainer.addEventListener("click", (e) => {
-  if (e.target.classList.contains("delete-task-btn")) {
-    const id = e.target.dataset.id;
+  const deleteBtn = e.target.closest(".delete-task-btn");
 
-    deleteTodo(id);
+  if (!deleteBtn) return;
 
-    clearContainer(allTodosContainer);
+  const id = deleteBtn.dataset.id;
+  console.log(id);
 
-    if (currentProject) {
-      const project = projects.find((p) => p.id === currentProject.id);
-      project.todos.forEach((todo) => {
-        displayTodoDom(todo, allTodosContainer);
-      });
-    } else
-      todos.forEach((todo) => {
-        displayTodoDom(todo, allTodosContainer);
-      });
-  }
+  deleteTodo(id);
+
+  clearContainer(allTodosContainer);
+
+  if (currentProject) {
+    const project = projects.find((p) => p.id === currentProject.id);
+    project.todos.forEach((todo) => {
+      displayTodoDom(todo, allTodosContainer);
+    });
+  } else
+    todos.forEach((todo) => {
+      displayTodoDom(todo, allTodosContainer);
+    });
 });
 
 // FUNCTIONS
@@ -229,11 +238,9 @@ export function displayProjectDom(project, container) {
 }
 
 export function displayTodosInProjectDom(project, container) {
-  if (project.todos > 0) {
-    project.todos.forEach((todo) => {
-      displayTodoDom(todo, container);
-    });
-  }
+  project.todos.forEach((todo) => {
+    displayTodoDom(todo, container);
+  });
 }
 
 export function clearContainer(container) {
