@@ -154,7 +154,7 @@ h1 {
   display: flex;
 }
 
-.sidebar {
+#sidebar {
   height: 90vh;
   max-height: 90vh;
   width: 15vw;
@@ -173,6 +173,13 @@ h2 {
 }
 .nav-el:hover {
   background-color: var(--bg-primary-darker);
+}
+
+button.nav-el {
+  all: unset;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
 }
 
 h3 {

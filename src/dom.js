@@ -51,27 +51,15 @@ const addBtn = document.getElementById("addBtn");
 // SIDEBAR EVENT LISTENERS
 // Tasks event listeners (All, Today, This Week)
 allTaskBtn.addEventListener("click", () => {
-  clearCurrentProject();
-  clearContainer(allTodosContainer);
-  mainTitle.textContent = "All Tasks";
-  newTaskBtn.textContent = "New Task";
-  getAllTodos().forEach((todo) => displayTodoDom(todo, allTodosContainer));
+  refreshMain("All Tasks", getAllTodos);
 });
 
 todayBtn.addEventListener("click", () => {
-  clearCurrentProject();
-  clearContainer(allTodosContainer);
-  mainTitle.textContent = "Today";
-  newTaskBtn.textContent = "New Task";
-  getTodosToday().forEach((todo) => displayTodoDom(todo, allTodosContainer));
+  refreshMain("Today", getTodosToday);
 });
 
 thisWeekBtn.addEventListener("click", () => {
-  clearCurrentProject();
-  clearContainer(allTodosContainer);
-  mainTitle.textContent = "This week";
-  newTaskBtn.textContent = "New Task";
-  getTodosThisWeek().forEach((todo) => displayTodoDom(todo, allTodosContainer));
+  refreshMain("This week", getTodosThisWeek);
 });
 
 // Projects event listeners (add btn, form, project selector and delete)
@@ -245,6 +233,16 @@ export function displayTodosInProjectDom(project, container) {
 
 export function clearContainer(container) {
   container.innerHTML = "";
+}
+
+function refreshMain(title, getTodosFn) {
+  clearCurrentProject();
+  clearContainer(allTodosContainer);
+
+  mainTitle.textContent = title;
+  newTaskBtn.textContent = "New Task";
+
+  getTodosFn().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 }
 
 // Theme switcher
