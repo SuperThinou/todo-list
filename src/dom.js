@@ -31,8 +31,10 @@ import {
 import { format, isToday, isTomorrow, isYesterday, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 
+const root = document.documentElement;
 const page = document.getElementById("page");
 const darkModeBtn = document.getElementById("darkModeBtn");
+const savedTheme = localStorage.getItem("theme");
 
 // SIDEBAR SELECTORS
 const allTaskBtn = document.getElementById("allTasksBtn");
@@ -230,6 +232,11 @@ export function displayTodoDom(todo, container) {
   description.textContent = todo.description;
   dueDate.textContent = "Deadline: " + formatDate(todo.dueDate);
   priority.textContent = "Priority: " + todo.priority;
+  if (todo.priority === "Low") {
+    priority.classList.add("blue");
+  } else if (todo.priority === "Medium") {
+    priority.classList.add("yellow");
+  } else priority.classList.add("red");
 
   taskBtnContainer.classList.add("task-btn-container");
 
@@ -319,9 +326,6 @@ function formatDate(dateString) {
 }
 
 // Theme switcher
-const root = document.documentElement;
-const savedTheme = localStorage.getItem("theme");
-
 if (savedTheme) {
   root.setAttribute("data-theme", savedTheme);
 } else {

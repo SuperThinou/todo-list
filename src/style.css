@@ -85,6 +85,9 @@ a {
   --red: rgb(240, 82, 82);
   --red-dark: rgb(68, 33, 33);
 
+  --blue: rgb(86, 180, 218);
+  --yellow: rgb(224, 165, 0);
+
   --font-color: white;
   --task-btn: rgb(83, 83, 83);
   --bg-footer: black;
@@ -105,6 +108,9 @@ a {
 
   --red: rgb(255, 209, 209);
   --red-dark: rgb(173, 75, 75);
+
+  --blue: rgb(86, 180, 218);
+  --yellow: rgb(224, 165, 0);
 
   --font-color: rgb(44, 44, 44);
   --task-btn: rgb(224, 224, 224);
@@ -476,6 +482,16 @@ legend {
   filter: blur(4px);
   pointer-events: none;
   user-select: none;
+}
+
+.blue {
+  color: var(--blue);
+}
+.yellow {
+  color: var(--yellow);
+}
+.red {
+  color: red;
 }
 
 /* Footer */
