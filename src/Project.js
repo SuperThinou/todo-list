@@ -6,8 +6,7 @@ export default class Project {
     this.title = title;
     this.todos = [];
   }
-  addTodo(todoData) {
-    const todo = new Todo(todoData);
+  addTodo(todo) {
     this.todos.push(todo);
   }
 }

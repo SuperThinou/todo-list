@@ -160,23 +160,13 @@ allTodosContainer.addEventListener("click", (e) => {
   const deleteBtn = e.target.closest(".delete-task-btn");
   const editBtn = e.target.closest(".edit-task-btn");
 
+  console.log(deleteBtn, editBtn);
+
   // DELETE
   if (deleteBtn) {
     const id = deleteBtn.dataset.id;
-    console.log("editingTodoId : " + id);
 
     deleteTodo(id);
-
-    if (currentProject) {
-      const project = projects.find((p) => p.id === currentProject.id);
-      project.todos.forEach((todo) => {
-        displayTodoDom(todo, allTodosContainer);
-      });
-    } else {
-      todos.forEach((todo) => {
-        displayTodoDom(todo, allTodosContainer);
-      });
-    }
 
     return;
   }
@@ -194,7 +184,6 @@ allTodosContainer.addEventListener("click", (e) => {
     if (currentProject) {
       const project = projects.find((p) => p.id === currentProject.id);
       todo = project.todos.find((todo) => todo.id === id);
-      console.log("ID de la todo : " + project.todos[0].id);
     } else {
       todo = todos.find((todo) => todo.id === id);
     }
