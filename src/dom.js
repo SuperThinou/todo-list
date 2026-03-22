@@ -232,11 +232,14 @@ export function displayTodoDom(todo, container) {
   description.textContent = todo.description;
   dueDate.textContent = "Deadline: " + formatDate(todo.dueDate);
   priority.textContent = "Priority: " + todo.priority;
-  if (todo.priority === "Low") {
-    priority.classList.add("blue");
-  } else if (todo.priority === "Medium") {
-    priority.classList.add("yellow");
-  } else priority.classList.add("red");
+
+  const priorityColors = {
+    Low: "blue",
+    Medium: "yellow",
+    High: "red",
+  };
+
+  priority.classList.add(priorityColors[todo.priority]);
 
   taskBtnContainer.classList.add("task-btn-container");
 
@@ -310,8 +313,10 @@ function modifyTodoDom(id) {
     todo.description;
   todoContainer.querySelector(".todo-duedate").textContent =
     "Deadline: " + formatDate(todo.dueDate);
-  todoContainer.querySelector(".todo-priority").textContent =
-    "Priority: " + todo.priority;
+  const priorityElement = todoContainer.querySelector(".todo-priority");
+  priorityElement.textContent = "Priority: " + todo.priority;
+
+  updatePriorityColor(priorityElement, todo.priority);
 }
 
 function formatDate(dateString) {
@@ -323,6 +328,20 @@ function formatDate(dateString) {
   if (isYesterday(date)) return "Hier";
 
   return format(date, "d MMMM yyyy", { locale: fr });
+}
+
+export function updatePriorityColor(priorityElement, priorityValue) {
+  priorityElement.classList.remove("blue", "yellow", "red");
+
+  const priorityColors = {
+    Low: "blue",
+    Medium: "yellow",
+    High: "red",
+  };
+
+  priorityElement.classList.add(
+    priorityColors[priorityValue] || "defaultColor",
+  );
 }
 
 // Theme switcher
