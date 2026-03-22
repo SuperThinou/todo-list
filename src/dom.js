@@ -163,9 +163,9 @@ allTodosContainer.addEventListener("click", (e) => {
   // DELETE
   if (deleteBtn) {
     const id = deleteBtn.dataset.id;
+    console.log("editingTodoId : " + id);
 
     deleteTodo(id);
-    clearContainer(allTodosContainer);
 
     if (currentProject) {
       const project = projects.find((p) => p.id === currentProject.id);
@@ -187,8 +187,17 @@ allTodosContainer.addEventListener("click", (e) => {
     page.classList.add("blur");
 
     const id = editBtn.dataset.id;
+    let todo = null;
     editingTodoId = id;
-    const todo = todos.find((todo) => todo.id === id);
+    console.log(currentProject);
+
+    if (currentProject) {
+      const project = projects.find((p) => p.id === currentProject.id);
+      todo = project.todos.find((todo) => todo.id === id);
+      console.log("ID de la todo : " + project.todos[0].id);
+    } else {
+      todo = todos.find((todo) => todo.id === id);
+    }
 
     fillPopupWithTaskContent(id, todo);
   }
@@ -270,7 +279,7 @@ export function displayTodosInProjectDom(project, container) {
   });
 }
 
-export function clearContainer(container) {
+function clearContainer(container) {
   container.innerHTML = "";
 }
 
@@ -285,12 +294,14 @@ function refreshMain(title, getTodosFn) {
   getTodosFn().forEach((todo) => displayTodoDom(todo, allTodosContainer));
 }
 
-function modifyTodoDom(editingTodoId) {
-  const todoContainer = document.querySelector(`[data-id="${editingTodoId}"]`);
+function modifyTodoDom(id) {
+  const todoContainer = document.querySelector(`[data-id="${id}"]`);
+  if (!todoContainer) return;
 
-  const todo = todos.find((todo) => todo.id === editingTodoId);
+  const todoList = currentProject ? currentProject.todos : todos;
+  const todo = todoList.find((t) => t.id === id);
+  if (!todo) return;
 
-  console.log(editingTodoId, todoContainer);
   if (!todoContainer) return;
 
   todoContainer.querySelector(".todo-title").textContent = todo.title;
@@ -315,7 +326,6 @@ function formatDate(dateString) {
 // Theme switcher
 darkModeBtn.addEventListener("click", () => {
   const currentTheme = root.getAttribute("data-theme");
-  console.log(currentTheme);
 
   if (currentTheme === "dark") {
     root.setAttribute("data-theme", "light");

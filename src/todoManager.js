@@ -1,5 +1,5 @@
 import Todo from "./Todo";
-import { currentProject } from "./projectManager";
+import { projects, currentProject } from "./projectManager";
 import { isToday, isThisWeek } from "date-fns";
 
 export let todos = [];
@@ -13,7 +13,19 @@ export function addTodo(todoData) {
 }
 
 export function modifyTodo(id, todoData) {
-  const todo = todos.find((todo) => todo.id === id);
+  let todo;
+
+  if (currentProject) {
+    const project = projects.find(
+      (project) => project.id === currentProject.id,
+    );
+    todo = project?.todos.find((todo) => todo.id === id);
+    console.log(todo, todoData);
+  } else {
+    todo = todos.find((todo) => todo.id === id);
+  }
+
+  if (!todo) return null;
 
   Object.assign(todo, todoData);
 
@@ -40,4 +52,8 @@ export function deleteTodo(id) {
       (todo) => todo.id !== id,
     );
   }
+  const todoContainer = document.querySelector(
+    `.todo-container[data-id="${id}"]`,
+  );
+  if (todoContainer) todoContainer.remove();
 }

@@ -22,7 +22,7 @@ defaultProject.addTodo({
   title: "My task in a project",
   description: "A little description",
   dueDate: "2026-03-20",
-  priority: "high",
+  priority: "High",
 });
 
 todos.push(defaultTodo);
