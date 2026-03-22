@@ -160,8 +160,6 @@ allTodosContainer.addEventListener("click", (e) => {
   const deleteBtn = e.target.closest(".delete-task-btn");
   const editBtn = e.target.closest(".edit-task-btn");
 
-  console.log(deleteBtn, editBtn);
-
   // DELETE
   if (deleteBtn) {
     const id = deleteBtn.dataset.id;
@@ -179,7 +177,6 @@ allTodosContainer.addEventListener("click", (e) => {
     const id = editBtn.dataset.id;
     let todo = null;
     editingTodoId = id;
-    console.log(currentProject);
 
     if (currentProject) {
       const project = projects.find((p) => p.id === currentProject.id);
