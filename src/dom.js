@@ -295,7 +295,8 @@ function modifyTodoDom(editingTodoId) {
     todo.description;
   todoContainer.querySelector(".todo-duedate").textContent =
     "Deadline: " + formatDate(todo.dueDate);
-  todoContainer.querySelector(".todo-priority").textContent = todo.priority;
+  todoContainer.querySelector(".todo-priority").textContent =
+    "Priority: " + todo.priority;
 }
 
 function formatDate(dateString) {
@@ -311,6 +312,7 @@ function formatDate(dateString) {
 // Theme switcher
 darkModeBtn.addEventListener("click", () => {
   const currentTheme = root.getAttribute("data-theme");
+  console.log(currentTheme);
 
   if (currentTheme === "dark") {
     root.setAttribute("data-theme", "light");

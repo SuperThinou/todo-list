@@ -13,7 +13,7 @@ import { projects } from "./projectManager";
 // Default todo and project
 const defaultTodo = new Todo({
   title: "Default task",
-  description: "My description",
+  description: "My default task description ",
   dueDate: "2026-03-15",
   priority: "Medium",
 });

@@ -302,6 +302,10 @@ main {
   align-items: center;
 }
 
+#mainTitle {
+  text-align: center;
+}
+
 .blue-btn {
   margin-bottom: 20px;
   min-width: 300px;
@@ -330,17 +334,41 @@ main {
   padding: 10px;
   border-radius: 10px;
   background-color: var(--bg-primary-darker);
-  overflow-wrap: break-word;
   position: relative;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .todo-container > * {
   padding: 5px;
+  white-space: normal;
+  min-width: 0;
+  text-align: center;
+}
+
+.todo-title {
+  margin: 0 20%;
+}
+.todo-description {
+  margin: 0 10%;
+}
+
+.todo-duedate {
+  font-style: italic;
+}
+
+.todo-priority {
+  font-weight: bold;
+}
+
+.todo-priority .red {
+  color: var(--red);
 }
 
 .task-btn-container {
