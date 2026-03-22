@@ -80,12 +80,21 @@ newProjectBtn.addEventListener("click", () => {
 });
 
 addProjectBtn.addEventListener("click", () => {
-  const projectName = document.getElementById("projectName").value;
-  if (projectName === "") return;
+  const projectNameInput = document.getElementById("projectName");
+  const projectName = projectNameInput.value;
+
+  const projectExists = projects.some(
+    (project) => project.title === projectName,
+  );
+
+  if (projectName === "" || projectExists)
+    return alert("Projects names must be different");
+
   const project = createProject(projectName);
   displayProjectDom(project, allProjectsContainer);
 
   newProjectForm.classList.add("hidden");
+  projectNameInput.value = "";
 });
 
 cancelProjectBtn.addEventListener("click", () => {
