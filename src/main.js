@@ -30,4 +30,4 @@ displayTodoDom(defaultTodo, allTodosContainer);
 projects.push(defaultProject);
 displayProjectDom(defaultProject, allProjectsContainer);
 
-//Faire feature pour modifier une todo et gérer save en local storage
+//Faire feature pour gérer save en local storage

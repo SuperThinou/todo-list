@@ -158,37 +158,40 @@ addBtn.addEventListener("click", () => {
 
 allTodosContainer.addEventListener("click", (e) => {
   const deleteBtn = e.target.closest(".delete-task-btn");
-
-  if (!deleteBtn) return;
-
-  const id = deleteBtn.dataset.id;
-
-  deleteTodo(id);
-  clearContainer(allTodosContainer);
-
-  if (currentProject) {
-    const project = projects.find((p) => p.id === currentProject.id);
-    project.todos.forEach((todo) => {
-      displayTodoDom(todo, allTodosContainer);
-    });
-  } else
-    todos.forEach((todo) => {
-      displayTodoDom(todo, allTodosContainer);
-    });
-});
-
-allTodosContainer.addEventListener("click", (e) => {
   const editBtn = e.target.closest(".edit-task-btn");
-  if (!editBtn) return;
 
-  TaskPopup.classList.remove("hidden");
-  page.classList.add("blur");
+  // DELETE
+  if (deleteBtn) {
+    const id = deleteBtn.dataset.id;
 
-  const id = editBtn.dataset.id;
-  editingTodoId = id;
-  const todo = todos.find((todo) => todo.id === id);
+    deleteTodo(id);
+    clearContainer(allTodosContainer);
 
-  fillPopupWithTaskContent(id, todo);
+    if (currentProject) {
+      const project = projects.find((p) => p.id === currentProject.id);
+      project.todos.forEach((todo) => {
+        displayTodoDom(todo, allTodosContainer);
+      });
+    } else {
+      todos.forEach((todo) => {
+        displayTodoDom(todo, allTodosContainer);
+      });
+    }
+
+    return;
+  }
+
+  // EDIT
+  if (editBtn) {
+    TaskPopup.classList.remove("hidden");
+    page.classList.add("blur");
+
+    const id = editBtn.dataset.id;
+    editingTodoId = id;
+    const todo = todos.find((todo) => todo.id === id);
+
+    fillPopupWithTaskContent(id, todo);
+  }
 });
 
 // FUNCTIONS
