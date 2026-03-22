@@ -1,6 +1,12 @@
 import Todo from "./Todo";
 import { projects, currentProject } from "./projectManager";
 import { isToday, isThisWeek } from "date-fns";
+import {
+  deleteTodoStorage,
+  saveTodoStorage,
+  updateTodoStorage,
+  updateProjectStorage,
+} from "./storage";
 
 export let todos = [];
 
@@ -8,7 +14,10 @@ export function addTodo(todoData) {
   const todo = new Todo(todoData);
   if (!currentProject) {
     todos.push(todo);
+
+    saveTodoStorage(todo);
   }
+
   return todo;
 }
 
@@ -19,15 +28,25 @@ export function modifyTodo(id, todoData) {
     const project = projects.find(
       (project) => project.id === currentProject.id,
     );
+
     todo = project?.todos.find((todo) => todo.id === id);
-    console.log(todo, todoData);
+
+    if (!todo) return null;
+
+    Object.assign(todo, todoData);
+
+    updateProjectStorage(project.id, {
+      todos: project.todos,
+    });
   } else {
     todo = todos.find((todo) => todo.id === id);
+
+    if (!todo) return null;
+
+    Object.assign(todo, todoData);
   }
 
-  if (!todo) return null;
-
-  Object.assign(todo, todoData);
+  updateTodoStorage(id, todoData);
 
   return todo;
 }
@@ -51,9 +70,16 @@ export function deleteTodo(id) {
     currentProject.todos = currentProject.todos.filter(
       (todo) => todo.id !== id,
     );
+
+    updateProjectStorage(currentProject.id, {
+      todos: currentProject.todos,
+    });
   }
+
   const todoContainer = document.querySelector(
     `.todo-container[data-id="${id}"]`,
   );
   if (todoContainer) todoContainer.remove();
+
+  deleteTodoStorage(id);
 }

@@ -1,5 +1,3 @@
-import Todo from "./Todo";
-
 export default class Project {
   constructor(title) {
     this.id = crypto.randomUUID();

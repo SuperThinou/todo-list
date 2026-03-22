@@ -31,6 +31,8 @@ import {
 import { format, isToday, isTomorrow, isYesterday, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 
+import { getProjectsStorage } from "./storage.js";
+
 const root = document.documentElement;
 const page = document.getElementById("page");
 const darkModeBtn = document.getElementById("darkModeBtn");
@@ -309,6 +311,7 @@ function modifyTodoDom(id) {
 }
 
 function formatDate(dateString) {
+  if (!dateString) return "No date";
   const date = parseISO(dateString);
 
   if (isToday(date)) return "Aujourd’hui";
