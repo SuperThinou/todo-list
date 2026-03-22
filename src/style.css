@@ -373,7 +373,7 @@ main {
   justify-content: center;
 }
 
-#newTaskForm {
+#TaskForm {
   z-index: 10;
   margin: 50px;
   background-color: var(--bg-primary);
@@ -391,7 +391,7 @@ main {
   margin: 10px;
 }
 
-#newTaskForm > input {
+#TaskForm > input {
   margin: 5px;
   padding: 10px;
   border: 1px solid var(--bg-primary-darkest);

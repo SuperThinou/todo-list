@@ -9,6 +9,7 @@ import {
   getTodosToday,
   getTodosThisWeek,
   deleteTodo,
+  modifyTodo,
 } from "./todoManager";
 
 import {
@@ -20,6 +21,12 @@ import {
   clearCurrentProject,
   deleteProject,
 } from "./projectManager.js";
+
+import {
+  fillPopupWithTaskContent,
+  isEditingTask,
+  resetPopupContent,
+} from "./formManager.js";
 
 import { format, isToday, isTomorrow, isYesterday, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -46,10 +53,12 @@ export const allTodosContainer = document.getElementById("allTodosContainer");
 export const allTodosInProjectContainer = document.getElementById(
   "allTodosInProjectContainer",
 );
-const newTaskBtn = document.getElementById("newTaskBtn");
-const newTaskPopup = document.getElementById("newTaskPopup");
-const form = document.getElementById("newTaskForm");
+export const newTaskBtn = document.getElementById("newTaskBtn");
+export const TaskPopup = document.getElementById("TaskPopup");
+export const form = document.getElementById("TaskForm");
 const addBtn = document.getElementById("addBtn");
+
+let editingTodoId = null;
 
 // SIDEBAR EVENT LISTENERS
 // Tasks event listeners (All, Today, This Week)
@@ -117,12 +126,13 @@ allProjectsContainer.addEventListener("click", (e) => {
 // MAIN EVENT LISTENERS
 // New task btn, popup form and task btns
 newTaskBtn.addEventListener("click", () => {
-  newTaskPopup.classList.remove("hidden");
+  resetPopupContent();
+  TaskPopup.classList.remove("hidden");
   page.classList.add("blur");
 });
 
-newTaskPopup.addEventListener("click", (e) => {
-  newTaskPopup.classList.add("hidden");
+TaskPopup.addEventListener("click", (e) => {
+  TaskPopup.classList.add("hidden");
   page.classList.remove("blur");
 });
 form.addEventListener("click", (e) => {
@@ -131,12 +141,18 @@ form.addEventListener("click", (e) => {
 
 addBtn.addEventListener("click", () => {
   if (form.checkValidity()) {
-    newTaskPopup.classList.add("hidden");
+    TaskPopup.classList.add("hidden");
     page.classList.remove("blur");
 
-    const todo = addTodo(getFormValues());
-    addTodoToCurrentProject(todo);
-    displayTodoDom(todo, allTodosContainer);
+    if (isEditingTask) {
+      modifyTodo(editingTodoId, getFormValues());
+      modifyTodoDom(editingTodoId);
+      editingTodoId = null;
+    } else {
+      const todo = addTodo(getFormValues());
+      addTodoToCurrentProject(todo);
+      displayTodoDom(todo, allTodosContainer);
+    }
   } else alert("Required fields can't be empty");
 });
 
@@ -163,12 +179,16 @@ allTodosContainer.addEventListener("click", (e) => {
 
 allTodosContainer.addEventListener("click", (e) => {
   const editBtn = e.target.closest(".edit-task-btn");
-
   if (!editBtn) return;
-  newTaskPopup.classList.remove("hidden");
+
+  TaskPopup.classList.remove("hidden");
   page.classList.add("blur");
 
-  console.log("bonjour");
+  const id = editBtn.dataset.id;
+  editingTodoId = id;
+  const todo = todos.find((todo) => todo.id === id);
+
+  fillPopupWithTaskContent(id, todo);
 });
 
 // FUNCTIONS
@@ -185,6 +205,7 @@ export function getFormValues() {
 export function displayTodoDom(todo, container) {
   const todoContainer = document.createElement("div");
   todoContainer.classList.add("todo-container");
+  todoContainer.dataset.id = todo.id;
 
   const title = document.createElement("h3");
   const description = document.createElement("p");
@@ -194,10 +215,14 @@ export function displayTodoDom(todo, container) {
   const editTaskBtn = document.createElement("button");
   const deleteTaskBtn = document.createElement("button");
 
+  title.classList.add("todo-title");
+  description.classList.add("todo-description");
+  dueDate.classList.add("todo-duedate");
+  priority.classList.add("todo-priority");
+
   title.textContent = todo.title;
   description.textContent = todo.description;
-  dueDate.textContent = dueDate.textContent =
-    "Deadline: " + formatDate(todo.dueDate);
+  dueDate.textContent = "Deadline: " + formatDate(todo.dueDate);
   priority.textContent = "Priority: " + todo.priority;
 
   taskBtnContainer.classList.add("task-btn-container");
@@ -255,6 +280,22 @@ function refreshMain(title, getTodosFn) {
   else newTaskBtn.textContent = "New Task ";
 
   getTodosFn().forEach((todo) => displayTodoDom(todo, allTodosContainer));
+}
+
+function modifyTodoDom(editingTodoId) {
+  const todoContainer = document.querySelector(`[data-id="${editingTodoId}"]`);
+
+  const todo = todos.find((todo) => todo.id === editingTodoId);
+
+  console.log(editingTodoId, todoContainer);
+  if (!todoContainer) return;
+
+  todoContainer.querySelector(".todo-title").textContent = todo.title;
+  todoContainer.querySelector(".todo-description").textContent =
+    todo.description;
+  todoContainer.querySelector(".todo-duedate").textContent =
+    "Deadline: " + formatDate(todo.dueDate);
+  todoContainer.querySelector(".todo-priority").textContent = todo.priority;
 }
 
 function formatDate(dateString) {

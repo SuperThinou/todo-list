@@ -12,6 +12,14 @@ export function addTodo(todoData) {
   return todo;
 }
 
+export function modifyTodo(id, todoData) {
+  const todo = todos.find((todo) => todo.id === id);
+
+  Object.assign(todo, todoData);
+
+  return todo;
+}
+
 export function getAllTodos() {
   return todos;
 }
