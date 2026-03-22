@@ -264,6 +264,8 @@ button.nav-el {
   max-height: 30vh;
   width: 100%;
   overflow: auto;
+  scrollbar-color: var(--bg-primary) transparent;
+  scrollbar-width: thin;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -331,6 +333,9 @@ main {
   max-height: 50vh;
   width: 100%;
   overflow: auto;
+  scrollbar-color: var(--bg-primary) transparent;
+  scrollbar-width: thin;
+
   display: flex;
   flex-direction: column-reverse;
 }
