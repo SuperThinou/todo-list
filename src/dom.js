@@ -31,9 +31,6 @@ import {
 import { format, isToday, isTomorrow, isYesterday, parseISO } from "date-fns";
 import { fr } from "date-fns/locale";
 
-import { getProjectsStorage } from "./storage.js";
-
-const root = document.documentElement;
 const page = document.getElementById("page");
 const darkModeBtn = document.getElementById("darkModeBtn");
 
@@ -322,16 +319,23 @@ function formatDate(dateString) {
 }
 
 // Theme switcher
+const root = document.documentElement;
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme) {
+  root.setAttribute("data-theme", savedTheme);
+} else {
+  root.setAttribute("data-theme", "light");
+}
+
 darkModeBtn.addEventListener("click", () => {
   const currentTheme = root.getAttribute("data-theme");
 
-  if (currentTheme === "dark") {
-    root.setAttribute("data-theme", "light");
-  } else {
-    root.setAttribute("data-theme", "dark");
-  }
-});
+  const newTheme = currentTheme === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", newTheme);
 
+  localStorage.setItem("theme", newTheme);
+});
 // Footer logo
 const link = document.querySelector(".github-link");
 link.innerHTML = githubIcon;
